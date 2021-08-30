@@ -45,21 +45,23 @@
       <th>Email</th>
       <th>Address</th>
       <th>contact</th>
+      <th>password</th>
       <!-- <th class="pointer">Edit</th> -->
       <!-- <th class="pointer">Delete</th> -->
     </tr>
     <tr *ngFor="let item of records">
-      <td>{{item.id}}</td>
-      <td>{{item.first_name}}{{item.middle_name}}{{item.last_name}}</td>
-      <td>{{item.username}}</td>
-      <td>{{item.email}}</td>
-      <td>{{item.address}}</td>
-      <td>{{item.contact}}</td>
+      <td>{{item.userID}}</td>
+      <td>{{item.Fname}}{{item.Mname}}{{item.Lname}}</td>
+      <td>{{item.user}}</td>
+      <td>{{item.Email}}</td>
+      <td>{{item.Address}}</td>
+      <td>{{item.Contact}}</td>
+      <td>{{item.pass}}</td>
       <td>
         <button class="btn btn-primary btn-sm" (click)="editRecord(mymodal, item.id)">Edit</button>
       </td>
       <td>
-        <button class="btn btn-danger btn-sm" (click)="deleteitem(item.id)">Delete</button>
+        <button class="btn btn-danger btn-sm" (click)="deleteRecord(userID)">Delete</button>
       </td>
     </tr>
   </table>

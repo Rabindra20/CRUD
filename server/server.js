@@ -49,7 +49,8 @@ web.post('/register', (req, res) => {
                 });
     });
 });
-web.get('/getuser', (req, res) => {
+web.get('/getuserdetail', (req, res) => {
+    var userID = req.body.userID;
     mongo.connect(url, (err, db) => {
         if (err) throw err;
         var con = db.db('user');
@@ -66,14 +67,14 @@ web.get('/getuser', (req, res) => {
     });
 });
 web.post('/adduserdetail', (req, res) => {
-    var user = req.body.user;
-    var Fname = req.body.Fname;
-    var Mname = req.body.Mname;
-    var Lname = req.body.Lname;
-    var Email = req.body.Email;
-    var Address = req.body.Address;
-    var Contact = req.body.Contact;
-    var pass = req.body.pass;
+    var user = req.body.username;
+    var Fname = req.body.first_name;
+    var Mname = req.body.middle_name;
+    var Lname = req.body.last_name;
+    var Email = req.body.email;
+    var Address = req.body.address;
+    var Contact = req.body.contact;
+    var pass = req.body.password;
     var obj = { user, Fname, Mname, Lname, Email, Address, Contact, pass };
     mongo.connect(url, (err, db) => {
         if (err) throw err;
@@ -94,14 +95,14 @@ web.post('/adduserdetail', (req, res) => {
 
 web.post('/updateuserdetail', (req, res) => {
     var userID = req.body.userID;
-    var user = req.body.user;
-    var Fname = req.body.Fname;
-    var Mname = req.body.Mname;
-    var Lname = req.body.Lname;
-    var Email = req.body.Email;
-    var Address = req.body.Address;
-    var Contact = req.body.Contact;
-    var pass = req.body.pass;
+    var user = req.body.username;
+    var Fname = req.body.first_name;
+    var Mname = req.body.middle_name;
+    var Lname = req.body.last_name;
+    var Email = req.body.email;
+    var Address = req.body.address;
+    var Contact = req.body.contact;
+    var pass = req.body.password;
     var newvalues = { $set: { user, Fname, Mname, Lname, Email, Address, Contact, pass } };
 
     var query = { _id: userID };
@@ -110,7 +111,7 @@ web.post('/updateuserdetail', (req, res) => {
         if (err) throw err;
         var con = db.db("user");
         con.collection('userdetail')
-            .findOneAndUpdate(query, newvalues, function (err, result) {
+            .findOneAndUpdate(query, newvalues, (err, result)=> {
                 if (err) throw err;
                 if (result != null) {
                     res.json({ 'status': 'success', 'msg': '1 Record Inserted' });
@@ -129,7 +130,7 @@ web.post('/deleteuserdetail', (req, res) => {
         if (err) throw err;
         var con = db.db("user");
         con.collection('userdetail')
-            .deleteOne(query, function (err, obj) {
+            .deleteOne(query, (err, obj) =>{
                 if (err) throw err;
                 console.log("1 document deleted");
                 db.close();

@@ -22,7 +22,7 @@ interface status {
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  records: any = AdduserdetailService;
+  records: any = [];
   newRecord = {
     first_name: '',
     middle_name: '',
@@ -38,8 +38,9 @@ export class HomeComponent implements OnInit {
 
   constructor(private route: Router, private modalService: NgbModal, private adduser: AdduserdetailService, private deleteuser: DeleteuserdetailService, private updateuser: UpdateuserdetailService, private getuser: GetuserdetailService) { }
   ngOnInit() {
-    this.getuser.getUser().subscribe(res => {
-      this.records = res;
+    this.getuser.getUser().subscribe((res:any) => {
+      console.log(res)
+      this.records = res.data;
     })
   }
 
@@ -91,7 +92,10 @@ export class HomeComponent implements OnInit {
     })
   }
 
-  deleteitem(userID) {
-    this.deleteuser.deleteUser(userID);
+  deleteRecord(userID) {
+    this.deleteuser.deleteUser(userID).subscribe;
+  }
+  refresh() {
+    return true;
   }
 }
