@@ -5,16 +5,13 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class UpdateuserdetailService {
-  url(userID) {
-    return `http://localhost:3000/updateuserdetail/${userID}`
-  }
-
+  url = 'http://localhost:3000/updateuserdetail'
 
   constructor(private http: HttpClient) { }
 
 
   updateuser(userID, updateParams) {
-    return this.http.post(this.url(userID), updateParams);
+    return this.http.post(this.url, {...updateParams, userID});
   }
 
 

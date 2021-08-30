@@ -93,6 +93,7 @@ web.post('/adduserdetail', (req, res) => {
 });
 
 web.post('/updateuserdetail', (req, res) => {
+    var userID = req.body.userID;
     var user = req.body.user;
     var Fname = req.body.Fname;
     var Mname = req.body.Mname;
@@ -103,7 +104,7 @@ web.post('/updateuserdetail', (req, res) => {
     var pass = req.body.pass;
     var newvalues = { $set: { user, Fname, Mname, Lname, Email, Address, Contact, pass } };
 
-    var query = { user: user };
+    var query = { _id: userID };
 
     MongoClient.connect(url, (err, db) => {
         if (err) throw err;
@@ -122,7 +123,7 @@ web.post('/updateuserdetail', (req, res) => {
 });
 
 web.post('/deleteuserdetail', (req, res) => {
-    var query = { _id: userID };
+    var query = { _id: req.body.userID };
 
     MongoClient.connect(url, (err, db) => {
         if (err) throw err;
