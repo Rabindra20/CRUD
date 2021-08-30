@@ -1,0 +1,19 @@
+div{
+    width: 30%;
+    background-color: rgb(223, 223, 223);
+    padding: 2px;
+    /* margin: auto; */
+    float: center;
+    border-radius:5px;
+    margin-left: 30%;
+    margin-top: 5%;
+    
+ }
+
+input[type=text],[type=password]{
+border-radius: 10px;
+}
+/* label{
+    color:whitesmoke;
+
+} */

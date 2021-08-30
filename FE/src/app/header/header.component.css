@@ -1,0 +1,12 @@
+
+  .nav-link-box
+  {
+    background-color: rgb(245, 97, 97);
+    cursor: pointer;
+    margin-left: 10%;
+    width: 100% !important;
+
+  }
+  #navbarTogglerDemo01 {
+    line-height: 32px;
+  }

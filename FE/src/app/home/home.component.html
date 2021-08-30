@@ -1,0 +1,66 @@
+<app-header></app-header> 
+<!-- <div class="" *ngIf="isLogin">
+    gggg
+</div> -->
+<div class="header p-3">
+  <div class="row">
+    <div class="col d-flex">
+      <h5>Users</h5>
+      <button class="btn btn-primary btn-sm ml-auto" (click)="openModal(mymodal)">Add user</button>
+    </div>
+  </div>
+</div>
+
+<ng-template #mymodal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Add New User</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">×</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form class="form-group">
+      <input class="form-control mb-3" type="text" name="first_name" [(ngModel)]="newRecord.first_name" placeholder="First Name" />
+      <input class="form-control mb-3" type="text" name="middle_name" [(ngModel)]="newRecord.middle_name" placeholder="Midle Name" />
+      <input class="form-control mb-3" type="text" name="last_name" [(ngModel)]="newRecord.last_name" placeholder="Last Name" />
+      <input class="form-control mb-3" type="text" name="username" [(ngModel)]="newRecord.username" placeholder="Username" />
+      <input class="form-control mb-3" type="email" name="email" [(ngModel)]="newRecord.email" placeholder="Email" />
+      <input class="form-control mb-3" type="password" name="password" [(ngModel)]="newRecord.password" placeholder="Password" />
+      <input class="form-control mb-3" type="text" name="address" [(ngModel)]="newRecord.address" placeholder="Address" />
+      <input class="form-control mb-3" type="text" name="contact" [(ngModel)]="newRecord.contact" placeholder="contact" />
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-success btn-sm" (click)="updateRecord()">Update</button>
+    <button type="button" class="btn btn-success btn-sm" (click)="addRecord()">Save</button>
+  </div>
+</ng-template>
+
+<div style="width: 100vw; height: calc(100vh - 70px); overflow: auto">
+  <table class="table table-border">
+    <tr>
+      <th>ID</th>
+      <th>Full name</th>
+      <th>Username</th>
+      <th>Email</th>
+      <th>Address</th>
+      <th>contact</th>
+      <!-- <th class="pointer">Edit</th> -->
+      <!-- <th class="pointer">Delete</th> -->
+    </tr>
+    <tr *ngFor="let item of records">
+      <td>{{item.id}}</td>
+      <td>{{item.first_name}}{{item.middle_name}}{{item.last_name}}</td>
+      <td>{{item.username}}</td>
+      <td>{{item.email}}</td>
+      <td>{{item.address}}</td>
+      <td>{{item.contact}}</td>
+      <td>
+        <button class="btn btn-primary btn-sm" (click)="editRecord(mymodal, item.id)">Edit</button>
+      </td>
+      <td>
+        <button class="btn btn-danger btn-sm" (click)="deleteitem(item.id)">Delete</button>
+      </td>
+    </tr>
+  </table>
+</div>
