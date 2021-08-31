@@ -16,3 +16,17 @@ export class UpdateuserdetailService {
 
 
 }
+// url(userID) {
+//   return `http://localhost:3000/updateuserdetail/${userID}`
+// }
+
+
+// constructor(private http: HttpClient) { }
+
+
+// updateUser(userID, updateParams) {
+//   return this.http.post(this.url(userID), updateParams);
+// }
+
+
+// }

@@ -33,19 +33,14 @@ export class HomeComponent implements OnInit {
     address: '',
     contact: '',
   };
-  modalState = 'add';
   editID = null
 
   constructor(private route: Router, private modalService: NgbModal, private adduser: AdduserdetailService, private deleteuser: DeleteuserdetailService, private updateuser: UpdateuserdetailService, private getuser: GetuserdetailService) { }
   ngOnInit() {
-    this.getuser.getUser().subscribe((res:any) => {
-      console.log(res)
-      this.records = res.data;
-    })
+    this.getUsers()
   }
 
   openModal(modalContent) {
-    this.modalState = 'add';
     this.modalService.open(modalContent, {
       ariaLabelledBy: 'modal-basic-title'
     });
@@ -64,21 +59,33 @@ export class HomeComponent implements OnInit {
     };
   }
 
+  getUsers() {
+    this.getuser.getUser().subscribe((res:any) => {
+      console.log(res)
+      this.records = res.data;
+    })
+  }
+
   addRecord() {
     this.adduser.addUser(this.newRecord).subscribe((data: status) => {
-      if (data.status == "success") {
-        alert("Added Successful");
-      }
       this.clearNewRecord();
       this.modalService.dismissAll();
+      this.getUsers()
     })
   }
 
   editRecord(modalContent, userID) {
-    this.modalState = 'edit';
+    console.log({userID})
     this.editID = userID;
-    const [selectedrecord] = this.records.filter(r => r.id === userID);
-    this.newRecord = selectedrecord;
+    const [selectedrecord] = this.records.filter(r => r._id === userID);
+    console.log({selectedrecord})
+    this.newRecord.address = selectedrecord.Address;
+    this.newRecord.first_name = selectedrecord.Fname;
+    this.newRecord.last_name = selectedrecord.Lanme;
+    this.newRecord.middle_name = selectedrecord.Mname;
+    this.newRecord.username = selectedrecord.user;
+    this.newRecord.email = selectedrecord.Email;
+    this.newRecord.password = selectedrecord.pas;
     this.openModal(modalContent);
   }
 
@@ -93,7 +100,8 @@ export class HomeComponent implements OnInit {
   }
 
   deleteRecord(userID) {
-    this.deleteuser.deleteUser(userID).subscribe;
+    this.deleteuser.deleteUser(userID).subscribe(res =>
+      this.getUsers());
   }
   refresh() {
     return true;

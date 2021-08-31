@@ -4,6 +4,7 @@ var cors = require('cors');
 var mongo = require('mongodb').MongoClient;
 var url = "mongodb://localhost:27017/";
 const web = express();
+const {ObjectID}=require('mongodb');
 web.use(cors());
 web.use(body.json());
 web.use(body.urlencoded({ extended: false }));
@@ -107,7 +108,7 @@ web.post('/updateuserdetail', (req, res) => {
 
     var query = { _id: userID };
 
-    MongoClient.connect(url, (err, db) => {
+    mongo.connect(url, (err, db) => {
         if (err) throw err;
         var con = db.db("user");
         con.collection('userdetail')
@@ -124,14 +125,21 @@ web.post('/updateuserdetail', (req, res) => {
 });
 
 web.post('/deleteuserdetail', (req, res) => {
-    var query = { _id: req.body.userID };
+   
+    var query = { _id: new ObjectID(req.body.userID )};
 
-    MongoClient.connect(url, (err, db) => {
+    mongo.connect(url, (err, db) => {
         if (err) throw err;
         var con = db.db("user");
         con.collection('userdetail')
-            .deleteOne(query, (err, obj) =>{
+            .deleteOne(query,  (err, result) =>{
                 if (err) throw err;
+                if (result != null) {
+                    res.json({ 'status': 'success', 'msg': '1 Record Deleted' });
+                }
+                else {
+                    res.json({ 'status': 'failed' });
+                }
                 console.log("1 document deleted");
                 db.close();
             });

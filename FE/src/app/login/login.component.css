@@ -1,17 +1,17 @@
 div{
-    width: 30%;
-    background-color: rgb(223, 223, 223);
-    padding: 2px;
+    width: 30% !important;
+    background-color: rgb(223, 223, 223)!important;
+    padding: 2px !important;
     /* margin: auto; */
-    float: center;
-    border-radius:5px;
-    margin-left: 30%;
-    margin-top: 5%;
+    float: center!important;
+    border-radius:5px !important;
+    margin-left: 30% !important;
+    margin-top: 5% !important;
     
  }
 
 input[type=text],[type=password]{
-border-radius: 10px;
+border-radius: 10px !important;
 }
 /* label{
     color:whitesmoke;
